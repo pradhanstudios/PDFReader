@@ -1,0 +1,10 @@
+PDF read-alouder
+
+TTS model on huggingface
+- https://huggingface.co/hexgrad/Kokoro-82M
+
+Tools and Frameworks
+- Python
+- pdf reader extension to do PDF to text
+- huggingface model for TTS
+
