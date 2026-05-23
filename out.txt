@@ -1,0 +1,266 @@
+Selected file:  /home/samik/Documents/books/Aditya Bhargava - Grokking Algorithms_ An Illustrated Guide for Programmers and Other Curious People-Manning Publications (2016).pdf
+
+grokking
+algorithms
+
+grokking
+algorithms
+An illustrated guide for 
+programmers and other curious people
+Aditya Y. Bhargava
+MANNING
+SHELTER  ISLAND
+For online information and ordering of this and other Manning books, please vis it
+www.manning.com. he publisher ofers discounts on this book when ordered in 
+quantity. For more information, please contact
+Special Sales Department
+Manning Publications Co.
+20 Baldwin Road, PO Box 761
+Shelter Island, NY 11964           
+Email: orders@manning.com
+©2016 by Manning Publications Co. All rights reserved.
+No part of this publication may be reproduced, stored in a retrieval system, o r 
+transmitted, in any form or by means electronic, mechanical, photocopy ing, or 
+otherwise, without prior written permission of the publisher.
+Many of the designations used by manufacturers and sellers to distinguish th eir 
+products are claimed as trademarks. Where those designations appear in th e book, 
+and Manning Publications was aware of a trademark claim, the designations h ave 
+been printed in initial caps or all caps.
+∞
+   Recognizing the importance of preserving what has been written, it is Manning’s 
+policy to have the books we publish printed on acid-free paper, and we exert our be st 
+eforts to that end. Recognizing also our responsibility to conserve the resour ces of 
+our planet, Manning books are printed on paper that is at least 15 percent recycled 
+and processed without the use of elemental chlorine.
+Manning Publications Co.   Development editor: Jennifer Stout
+20 Baldwin Road   Technical development editor: Damien White
+Shelter Island, NY 11964  Project manager: Tifany Taylor
+  Copyeditor: Tifany Taylor
+  Technical proofreader: Jean-François Morin
+  Typesetter: Leslie Haimes
+  Cover and interior design: Leslie Haimes
+  Illustrations by the author
+ISBN: 9781617292231
+Printed in the United States of America
+1 2 3 4 5 6 7 8 9 10 – EBM – 21 20 19 18 17 16
+For my parents, Sangeeta and Yogesh
+
+vii
+contents
+preface xiii
+acknowledgments xiv
+about this book xv
+1   Introduction to algorithms 1
+Introduction 1
+What you’ll learn about performance 2 
+What you’ll learn about solving problems 2
+Binary search 3
+A better way to search 5
+Running time 10
+Big O notation 10
+Algorithm running times grow at different rates  11
+Visualizing different Big O run times 13
+Big O establishes a worst-case run time 15
+Some common Big O run times 15
+The traveling salesperson 17
+Recap 19
+2   Selection sort 21
+How memory works 22
+Arrays and linked lists 24
+Linked lists 25
+Arrays 26
+Terminology 27
+Inserting into the middle of a list 29
+Deletions 30
+
+viii contents
+Selection sort 32
+Recap 36
+3   Recursion 37
+Recursion 38
+Base case and recursive case 40
+The stack  42
+The call stack 43
+The call stack with recursion 45
+Recap 50
+4   Quicksort 51
+Divide & conquer 52
+Quicksort 60
+Big O notation revisited 66
+Merge sort vs. quicksort 67
+Average case vs. worst case 68
+Recap 72
+5   Hash tables 73
+Hash functions 76
+Use cases 79
+Using hash tables for lookups 79
+Preventing duplicate entries 81
+Using hash tables as a cache 83
+Recap 86
+Collisions 86
+Performance 88
+Load factor 90
+A good hash function 92
+Recap 93
+6   Breadth-ﬁrst search 95
+Introduction to graphs 96
+What is a graph? 98
+Breadth-ﬁrst search 99
+Finding the shortest path 102
+ixcontents
+Queues 103
+Implementing the graph 105
+Implementing the algorithm 107
+Running time 111
+Recap 114
+7   Dijkstra’s algorithm 115
+Working with Dijkstra’s algorithm 116
+Terminology 120
+Trading for a piano 122
+Negative-weight edges 128
+Implementation 131
+Recap 140
+8   Greedy algorithms 141
+The classroom scheduling problem 142
+The knapsack problem 144
+The set-covering problem 146
+Approximation algorithms 147
+NP-complete problems 152
+Traveling salesperson, step by step 153
+How do you tell if a problem is NP-complete? 158
+Recap 160
+9   Dynamic programming 161
+The knapsack problem 161
+The simple solution  162
+Dynamic programming 163
+Knapsack problem FAQ 171
+What happens if you add an item? 171
+What happens if you change the order of the rows? 174
+Can you ﬁll in the grid column-wise instead  
+of row-wise? 174
+What happens if you add a smaller item? 174
+Can you steal fractions of an item? 175
+Optimizing your travel itinerary 175
+Handling items that depend on each other 177
+x contents
+Is it possible that the solution will require  
+     more than two sub-knapsacks? 177
+Is it possible that the best solution doesn’t ﬁll  
+     the knapsack completely? 178
+Longest common substring 178
+Making the grid 179
+Filling in the grid 180
+The solution 182
+Longest common subsequence 183
+Longest common subsequence—solution 184
+Recap 186
+10    K-nearest neighbors 187
+Classifying oranges vs. grapefruit 187
+Building a recommendations system 189
+Feature extraction 191
+Regression 195
+Picking good features 198
+Introduction to machine learning 199
+OCR 199
+Building a spam ﬁlter 200
+Predicting the stock market 201
+Recap 201
+11   Where to go next 203
+Trees 203
+Inverted indexes 206
+The Fourier transform 207
+Parallel algorithms 208
+MapReduce 209
+Why are distributed algorithms useful? 209
+The map function 209
+The reduce function 210
+Bloom ﬁlters and HyperLogLog 211
+Bloom ﬁlters 212
+xi
+HyperLogLog 213
+The SHA algorithms 213
+Comparing ﬁles 214
+Checking passwords 215
+Locality-sensitive hashing 216
+Difﬁe-Hellman key exchange 217
+Linear programming 218
+Epilogue 219
+answers to exercises 221
+index 235
+contents
+
+xiii
+preface
+I irst got into programming as a hobby. Visual Basic 6 for Dummies 
+taught me the basics, and I kept reading books to learn more. But the 
+subject of algorithms was impenetrable for me. I remember savoring 
+the table of contents of my irst algorithms book, thinking “I’m inally 
+going to understand these topics!” But it was dense stuf, and I gave 
+up ater a few weeks. It wasn’t until I had my irst good algorithms 
+professor that I realized how simple and elegant these ideas were.
+A few years ago, I wrote my irst illustrated blog post. I’m a visual 
+learner, and I really liked the illustrated style. Since then, I’ve written 
+a few illustrated posts on functional programming, Git, machine 
+learning, and concurrency. By the way: I was a mediocre writer when 
+I started out. Explaining technical concepts is hard. Coming up with 
+good examples takes time, and explaining a diicult concept takes time. 
+So it’s easiest to gloss over the hard stuf. I thought I was doing a pretty 
+good job, until ater one of my posts got popular, a coworker came up 
+to me and said, “I read your post and I still don’t understand this. ” I still 
+had a lot to learn about writing.
+Somewhere in the middle of writing these blog posts, Manning reached 
+out to me and asked if I wanted to write an illustrated book. Well, it 
+turns out that Manning editors know a lot about explaining technical 
+concepts, and they taught me how to teach. I wrote this book to scratch 
+a particular itch: I wanted to write a book that explained hard technical 
+topics well, and I wanted an easy-to-read algorithms book. My writing 
+has come a long way since that irst blog post, and I  hope you ind this 
+book an easy and informative read.
+
+xiv
+acknowledgments
+Kudos to Manning for giving me the chance to write this book and 
+letting me have a lot of creative freedom with it. hanks to publisher 
+Marjan Bace, Mike Stephens for getting me on board, Bert Bates for 
+teaching me how to write, and Jennifer Stout for being an incredibly 
+responsive and helpful editor. hanks also to the people on Manning’s 
+production team: Kevin Sullivan, Mary Piergies, Tifany Taylor, 
+Leslie Haimes, and all the others behind the scenes. In addition, I 
+want to thank the many people who read the manuscript and ofered 
+suggestions: Karen Bensdon, Rob Green, Michael Hamrah, Ozren 
+Harlovic, Colin Hastie, Christopher Haupt, Chuck Henderson, Pawel 
+Kozlowski, Amit Lamba, Jean-François Morin, Robert Morrison, 
+Sankar Ramanathan, Sander Rossel, Doug Sparling, and Damien White.
+hanks to the people who helped me reach this point: the folks on the 
+Flaskhit game board, for teaching me how to code; the many friends 
+who helped by reviewing chapters, giving advice, and letting me try 
+out diferent explanations, including Ben Vinegar, Karl Puzon, Alex 
+Manning, Esther Chan, Anish Bhatt, Michael Glass, Nikrad Mahdi, 
+Charles Lee, Jared Friedman, Hema Manickavasagam, Hari Raja, Murali 
+Gudipati, Srinivas Varadan, and others; and Gerry Brady, for teaching 
+me algorithms. Another big thank you to algorithms academics like 
+CLRS, Knuth, and Strang. I’m truly standing on the shoulders of giants.
+Dad, Mom, Priyanka, and the rest of the family: thank you for your 
+constant support. And a big thank you to my wife Maggie. here are 
+many adventures ahead of us, and some of them don’t involve staying 
+inside on a Friday night rewriting paragraphs.
+Finally, a big thank you to all the readers who took a chance on this 
+book, and the readers who gave me feedback in the book’s forum.  
+Y ou really helped make this book better.
+xv
+about this book
+his book is designed to be easy to follow. I avoid big leaps of thought. 
+Any time a new concept is introduced, I explain it right away or tell 
+you when I’ll explain it. Core concepts are reinforced with exercises 
+and multiple explanations so that you can check your assumptions and 
+make sure you’re following along.
+I lead with examples. Instead of writing symbol soup, my goal is to 
+make it easy for you to visualize these concepts. I also think we learn 
+best by being able to recall something we already know, and examples 
+make recall easier. So when you’re trying to remember the diference 
+between arrays and linked lists (explained in chapter 2), you can just 
+think about getting seated for a movie. Also, at the risk of stating the 
+obvious, I’m a visual learner. his book is chock-full of images.
+he contents of the book are carefully curated. here’s no need to 
+write a book that covers every sorting algorithm—that’s why we have 
+Wikipedia and Khan Academy. All the algorithms I’ve in
